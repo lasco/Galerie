@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block page-id %}Add-invoice{% endblock %}
+{% block content %}
+
+    <div id="menu">
+          <ul>
+            <li><a href="{% url home %}"><span>Acceuil</span></a></li>
+            <li><a href=""><span>Photographes</span></a></li>
+            <li><a href="#"><span>Ajout d'auteur</span></a></li>
+            <li><a href="#"><span>CSS Menus</span></a></li>
+          </ul>
+    </div>
+
+    <h1>Ajout d'une photo</h1>
+    
+    <form method="post">{% csrf_token %}
+            {{form.as_ul}}
+            <p class='prepend-11'><input type='submit' value = "Rechercher"/></p>
+             <script type="text/javascript">
+
+           $('#id_date').datepicker({ dateFormat: 'dd/mm/yy',
+                                      showButtonPanel: true,
+                                      closeText: 'X'
+                                    })</script>
+        
+    </form>
+
+     {% endblock %}

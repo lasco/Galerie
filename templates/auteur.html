@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block page-id %}Add-invoice{% endblock %}
+{% block content %}
+
+    <div id="menu">
+          <ul>
+            <li><a href="{% url home %}"><span>Acceuil</span></a></li>
+            <li><a href=""><span>Photographes</span></a></li>
+            <li><a href="#"><span>Ajout d'auteur</span></a></li>
+            <li><a href="#"><span>CSS Menus</span></a></li>
+          </ul>
+    </div>
+  
+            <h1>Recherche d'un photographe</h1>
+
+    <form method="post" action="" id= "autor" >{% csrf_token %}
+                <div class='prepend-6'> {{form.as_ul}} </div>
+            <p class='prepend-11'><input type='submit' value = "Rechercher"/>   </p>
+
+
+    </form>
+    
+            {% if info %}
+                    <h3>Toutes les photos {{info.photographe.prenom}} {{info.photographe.nom}}</h3>
+
+                    {% for photogr in autor %}
+
+                    <img src="/static/{{photogr.thumbnail}}" alt= "Image"/>
+                    
+                    {% endfor %}
+            {% endif %}
+            
+                    <p><center>{{error}}</center></p>
+                    
+            
+            
+
+ {% endblock %}

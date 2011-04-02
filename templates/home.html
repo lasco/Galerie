@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block page-id %}Add-invoice{% endblock %}
+{% block content %}
+
+    <div id="menu">
+          <ul>
+            <li><a href="{% url home %}"><span>Acceuil</span></a></li>
+            <li><a href="{% url auteur %}"><span>Photographes</span></a></li>
+            <li><a href="#"><span>Ajout d'auteur</span></a></li>
+            <li><a href="#"><span>djire</span></a></li>
+          </ul>
+    </div>
+
+            <h1>Toutes les images</h1> 
+
+
+</div>
+
+<h1 align="center">Accueil</h1> 
+<div class="yoxview">  
+    <div id="wrapper">  
+        <a href="http://dev7studios.com" id="dev7link" title="Go to dev7studios">dev7studios</a>
+        <div id="slider-wrapper">
+            <div id="slider" class="nivoSlider">    
+		{% for b in a %}
+<a href="/static/{{b.photo}}" target="_blank" border="3" align="center" > 
+<img class="prepend-5" src="/static/{{b.thumbnail}}" alt="/static/{{b.photo}}" height="350" width="350" title="{{b.title}}" />
+</a>
+        {% endfor %}
+            </div>
+           
+        </div>
+    </div>  
+</div>                  
+    <script type="text/javascript" src="static/js/jquery-1.4.3.min.js"></script>
+    <script type="text/javascript" src="static/js/jquery.nivo.slider.pack.js"></script>
+    <script type="text/javascript">
+    $(window).load(function() {
+        $('#slider').nivoSlider();
+    });
+    </script> 
+{% endblock %}

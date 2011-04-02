@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}photographes{% endblock %}
+{% block page-id %}Add-invoice{% endblock %}
+{% block content %}
+
+    <div id="menu">
+          <ul>
+            <li><a href="{% url home %}"><span>Acceuil</span></a></li>
+            <li><a href="{% url photographe %}"><span>Photographes</span></a></li>
+            <li><a href=""><span>Recherche d'auteur</span></a></li>
+            <li><a href="#"><span>djire</span></a></li>
+          </ul>
+    </div>
+
+            <h1>Tous les photographes</h1>
+
+    <table class="span-15 last">
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Date de naissance</th>
+            <th>E-mail</th>
+            {% for autor in photogr %}
+                <tr>
+                    <td>{{autor.nom}}</td>
+                    <td>{{autor.prenom}}</td>
+                    <td>{{autor.date1}}</td>
+                    <td>{{autor.email}}</td>
+                </tr>
+            {% endfor %}
+    </table>
+
+
+
+{% endblock %}
