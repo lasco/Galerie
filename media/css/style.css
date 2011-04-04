@@ -32,6 +32,10 @@ body {
 	color:black;
 	background:white;
 }
+label {
+display:block; /*La balise devient de type block*/
+width:250px;
+}
 table {
 	border-collapse:separate;
 	border-spacing:0;
