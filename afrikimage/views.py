@@ -5,6 +5,7 @@ from django.core.context_processors import csrf
 from django.core.paginator import Paginator, EmptyPage
 from django.core.urlresolvers import reverse
 from django.http import Http404
+from django.core.files.uploadedfile import SimpleUploadedFile
 
 
 
@@ -62,32 +63,32 @@ def add_photo(request):
     c = {}
     c.update(csrf(request))
     form = PhotoForm()
-    
     c =({'form':form})
-    a = Photo()
-    print request.POST
     if request.method == 'POST':
-        #~ log= request.FILES['photo']
-        form = PhotoForm(request.POST)
-        print '/static/photos/%s' %request.POST['photo']
-        dict_= {
+        #~ from ipdb import set_trace; set_trace()
+        form = PhotoForm(request.POST,request.FILES)
+        img = request.POST['photo']
+        data=   {
                     'photographe': request.POST['photographe'],\
                     'title': request.POST['title'],\
                     'format': request.POST['format'],\
                     'mode': request.POST['mode'],\
                     'date':request.POST['date'],\
                     'type_p': request.POST['type_p'],\
-                    'photo': request.POST['photo'],\
                     'lieux':request.POST['lieux'],\
                     'appareil':request.POST['appareil'],\
                     'sens': request.POST['sens'],\
                     'description':request.POST['description'],\
                 }
-        form = PhotoForm(dict_)
-        from ipdb import set_trace; set_trace()
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('home'))
+        print data
+        file_data = {'photo':SimpleUploadedFile(img)}
+        print file_data
+        
+        form = PhotoForm(data,file_data)
+        #~ from ipdb import set_trace; set_trace()
+        #~ if form.is_valid():
+            #~ form.save()
+            #~ return HttpResponseRedirect(reverse('home'))
         c.update({'form':form})
     c.update(csrf(request))
     return render_to_response('add_photo.html',c)
