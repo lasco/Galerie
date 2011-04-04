@@ -32,9 +32,11 @@ body {
 	background:white;
 }
 label {
-display:block; /*La balise devient de type block*/
-width:250px;
+display:block;
+width:150px;
+float:left;
 }
+
 table {
 	border-collapse:separate;
 	border-spacing:0;
