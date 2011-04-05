@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     url(r'^galerie$','afrikimage.views.galerie',name='galerie'),
     url(r'^photographes$', 'afrikimage.views.photographe',name='photographe'),
     url(r'^ajoutphoto$' , 'afrikimage.views.add_photo',name='ajoutphoto'),
+    url(r'^ajoutautor$', 'afrikimage.views.add_autor',name='ajoutautor'),
     url(r'^admin/', include(admin.site.urls)),
 
 

@@ -12,11 +12,11 @@ class PhotoForm(forms.ModelForm):
         model = Photo
 
 
-#~ class Autorform(forms.Form):
-    #~ nom = forms.CharField(max_length=30)
-    #~ prenom =forms.CharField(max_length=30)
-    #~ nationalite=forms.CharField(max_length=30)
-    #~ date1= forms.DateField(label='date de naissance')
-    #~ addrese =forms.TextField(max_length=200)
-    #~ email = forms.EmailField ()
-    
+class Autorform(forms.Form):
+    nom = forms.CharField(max_length=30)
+    prenom =forms.CharField(max_length=30)
+    nationalite=forms.CharField(max_length=30)
+    date1= forms.DateField(label='date de naissance')
+    adresse =forms.CharField(max_length = 200)
+    email = forms.EmailField ()
+    experience = forms.IntegerField(required=False)

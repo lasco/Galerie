@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}ajout de photographe{% endblock %}
+{% block page-id %}Add-invoice{% endblock %}
+{% block content %}
+
+    <div id="menu">
+          <ul>
+            <li><a href="{% url home %}"><span>Acceuil</span></a></li>
+            <li><a href=""><span>Photographes</span></a></li>
+            <li><a href="#"><span>Ajout d'auteur</span></a></li>
+            <li><a href="#"><span>CSS Menus</span></a></li>
+          </ul>
+    </div>
+
+            <h1>Ajout de photographe</h1>
+
+    <form method = 'post' action =''>{% csrf_token %}
+                                {% for field in form %}<br/>
+                            <span id="label_fixed">{{ field.label_tag }}:</span> {{ field }}
+                                {% endfor %}
+        <p class='prepend-6'><input type='submit' value = "Ajouter"/></p>
+    </form>
+
+{% endblock %}

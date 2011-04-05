@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response,HttpResponseRedirect
 from afrikimage.models import * 
-from form import SearchForm ,PhotoForm
+from form import SearchForm ,PhotoForm,Autorform
 from django.core.context_processors import csrf
 from django.core.paginator import Paginator, EmptyPage
 from django.core.urlresolvers import reverse
@@ -67,7 +67,6 @@ def add_photo(request):
     if request.method == 'POST':
         #~ from ipdb import set_trace; set_trace()
         form = PhotoForm(request.POST,request.FILES)
-        img = request.POST['photo']
         data=   {
                     'photographe': request.POST['photographe'],\
                     'title': request.POST['title'],\
@@ -80,11 +79,19 @@ def add_photo(request):
                     'sens': request.POST['sens'],\
                     'description':request.POST['description'],\
                 }
-        print data
-        file_data = {'photo':SimpleUploadedFile(img)}
-        print file_data
         
-        form = PhotoForm(data,file_data)
+        print request.FILES['photo']
+        print 'yeahhhhh'
+        #~ if form.is_valid():
+            #~ 
+            #~ uploadedImage = form.cleaned_data['photo']
+            #~ print uploadedImage
+
+        #~ print data
+        #~ file_data = {'photo':SimpleUploadedFile(img)}
+        #~ print file_data
+        
+        #~ form = PhotoForm(data,file_data)
         #~ from ipdb import set_trace; set_trace()
         #~ if form.is_valid():
             #~ form.save()
@@ -114,3 +121,22 @@ def auteur (request):
             c.update({'error':error,'form':form})
     c.update(csrf(request))
     return render_to_response('auteur.html',c)
+    
+def add_autor(request):
+    c = {}
+    c.update(csrf(request))
+    form = Autorform()
+    c.update({'form':form})
+    autor = Auteur()
+    if request.method == 'POST':
+        autor.nom = request.POST.get('nom')
+        autor.prenom = request.POST.get('prenom')
+        autor.nationalite = request.POST.get('nationalite')
+        autor.date1 = request.POST.get('date1')
+        autor.adresse = request.POST.get('adresse')
+        autor.email  = request.POST.get('email')
+        autor.experience = request.POST.get('experience')
+        autor.save()
+        return HttpResponseRedirect(reverse('photographe'))
+        c.update({'form':form})
+    return render_to_response('add_autor.html', c )
