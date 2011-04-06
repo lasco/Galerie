@@ -5,10 +5,11 @@
 
     <div id="menu">
           <ul>
-            <li><a href="{% url home %}"><span>Acceuil</span></a></li>
-            <li><a href="{% url auteur %}"><span>Photographes</span></a></li>
-            <li><a href="#"><span>Ajout d'auteur</span></a></li>
-            <li><a href="#"><span>djire</span></a></li>
+            <li><a href="{% url galerie %}"><span>Acceuil</span></a></li>
+            <li><a href="{% url photographe %}"><span>Photographes</span></a></li>
+            <li><a href="{% url ajoutautor %}"><span>Ajout d'auteur</span></a></li>
+            <li><a href="{% url ajoutphoto %}"><span>Ajout de photo </span></a></li>
+            
           </ul>
     </div>
 
@@ -20,7 +21,6 @@
 <h1 align="center">Accueil</h1> 
 <div class="yoxview">  
     <div id="wrapper">  
-        <a href="http://dev7studios.com" id="dev7link" title="Go to dev7studios">dev7studios</a>
         <div id="slider-wrapper">
             <div id="slider" class="nivoSlider">    
 		{% for b in a %}
