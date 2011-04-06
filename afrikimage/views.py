@@ -73,17 +73,17 @@ def add_photo(request):
                     'format': request.POST['format'],\
                     'mode': request.POST['mode'],\
                     'date':request.POST['date'],\
+                    'photo':request.FILES['photo'],\
                     'type_p': request.POST['type_p'],\
                     'lieux':request.POST['lieux'],\
                     'appareil':request.POST['appareil'],\
                     'sens': request.POST['sens'],\
                     'description':request.POST['description'],\
                 }
-        
-        print request.FILES['photo']
-        print 'yeahhhhh'
-        #~ if form.is_valid():
-            #~ 
+
+        if form.is_valid():
+			form.save()
+			return HttpResponseRedirect(reverse('galerie'))
             #~ uploadedImage = form.cleaned_data['photo']
             #~ print uploadedImage
 
