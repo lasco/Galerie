@@ -21,7 +21,7 @@
             <th>E-mail</th>
             {% for autor in photogr %}
                 <tr>
-                    <td>{{autor.nom}}</td>
+                    <td><a href='{% url infoauteur autor.id  %}'> {{autor.nom}} </a></td>
                     <td>{{autor.prenom}}</td>
                     <td>{{autor.date1}}</td>
                     <td>{{autor.email}}</td>

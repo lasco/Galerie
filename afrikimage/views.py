@@ -54,11 +54,20 @@ def photographe (request):
 
     return render_to_response('photographe.html',{'photogr':photogr})
 
+def infoauteur(request,*args, **kwargs):
+    id_ = kwargs["id"]
+    print id_
+    autor = Auteur.objects.filter(id = id_)
+    print autor
+    context = {'autor':autor}
+    return render_to_response('infoauteur.html',context)
+
+
 def galerie(request):
     a = Photo.objects.select_related().order_by("photographe__nom")
     return render_to_response('galerie.html',{'a':a})
 
-    
+
 def add_photo(request):
     c = {}
     c.update(csrf(request))
@@ -82,20 +91,8 @@ def add_photo(request):
                 }
 
         if form.is_valid():
-			form.save()
-			return HttpResponseRedirect(reverse('galerie'))
-            #~ uploadedImage = form.cleaned_data['photo']
-            #~ print uploadedImage
-
-        #~ print data
-        #~ file_data = {'photo':SimpleUploadedFile(img)}
-        #~ print file_data
-        
-        #~ form = PhotoForm(data,file_data)
-        #~ from ipdb import set_trace; set_trace()
-        #~ if form.is_valid():
-            #~ form.save()
-            #~ return HttpResponseRedirect(reverse('home'))
+            form.save()
+            return HttpResponseRedirect(reverse('galerie'))
         c.update({'form':form})
     c.update(csrf(request))
     return render_to_response('add_photo.html',c)
