@@ -98,15 +98,15 @@ a:hover, a:active {
     width:998px;
     height:392px;
     margin:0 auto;
-    padding-top:74px;
-    margin-top:50px;
+    padding-top:45px;
+    margin-top:0px;
 }
 
 #slider {
 	position:relative;
     width:500px;
     height:246px;
-    margin-left:190px;
+    margin-left:220px;
 	background:url(images/loading.gif) no-repeat 50% 50%;
 }
 #slider img {
@@ -184,6 +184,8 @@ h1 {
     font-size:20px;
     text-align:center;
     padding-top:3em;
+    margin-bottom:20px;
+    
 	}
 #page_id h1{
 padding-bottom:2em;
@@ -213,7 +215,7 @@ padding-bottom:2em;
 #menu a {
 	float:left;
 	background:url("tableft.gif") no-repeat left top;
-	margin:0;
+	margin:0px;
 	padding:0 0 0 4px;
 	text-decoration:none;
 	}
