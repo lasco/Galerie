@@ -17,7 +17,7 @@ class Auteur(models.Model):
         return "%s %s" % (self.nom,self.prenom)
 
 
-class Lieu(models.Model):
+class Lieux(models.Model):
     
     cadre = models.CharField(max_length=15,choices= (('I','Interieur'),
                                                      ('E','Exterieur')))
@@ -54,7 +54,7 @@ class Photo(models.Model):
                                      ('N','Numerique')))
     photo = models.ImageField(upload_to="photos/")
     thumbnail = models.ImageField(upload_to="thumbnails/", editable=False)
-    lieux = models.ForeignKey(Lieu)
+    lieux = models.ForeignKey(Lieux)
     appareil = models.CharField(max_length=40,
                                 verbose_name=u"Appareil utilise")
     sens = models.CharField(max_length=20,choices=(('H','Horizontale'),
@@ -108,4 +108,4 @@ class Photo(models.Model):
         
 admin.site.register(Photo)
 admin.site.register(Auteur)
-admin.site.register(Lieu)
+admin.site.register(Lieux)

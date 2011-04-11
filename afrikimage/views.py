@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response,HttpResponseRedirect
 from afrikimage.models import * 
-from form import SearchForm ,PhotoForm,Autorform
+from form import SearchForm ,PhotoForm,Autorform,LieuxForm
 from django.core.context_processors import csrf
 from django.core.paginator import Paginator, EmptyPage
 from django.core.urlresolvers import reverse
@@ -118,7 +118,7 @@ def auteur (request):
             c.update({'error':error,'form':form})
     c.update(csrf(request))
     return render_to_response('auteur.html',c)
-    
+
 def add_autor(request):
     c = {}
     c.update(csrf(request))
@@ -137,3 +137,32 @@ def add_autor(request):
         return HttpResponseRedirect(reverse('photographe'))
         c.update({'form':form})
     return render_to_response('add_autor.html', c )
+
+
+def add_lieux(request):
+    context = {}
+    context.update(csrf(request))
+    form = LieuxForm()
+    context.update({'form':form})
+    if request.method == 'POST':
+        data =  {
+                    'cadre': request.POST['cadre'],\
+                    'saison': request.POST['saison'],\
+                    'type_in':request.POST['type_in'],\
+                    'type_ex' : request.POST['type_ex'],\
+                }
+        try:
+            doublon = Lieux.objects.filter(cadre = data['cadre'],saison = data['saison'],type_in = data['type_in'],type_ex = data['type_ex'])
+        except ValueEror:
+            pass
+        form = LieuxForm(data)
+        if form.is_valid():
+            if not doublon:
+                form.save()
+                return HttpResponseRedirect(reverse('ajoutphoto'))
+            else:
+                context.update({'form':form,'error':'existe deja'})
+                return render_to_response ('add_lieux.html',context)
+    context.update(csrf(request))    
+    return render_to_response('add_lieux.html',context,)
+    

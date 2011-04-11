@@ -20,7 +20,8 @@ urlpatterns = patterns('',
 
     url(r'^infoauteur/(?P<id>\d+)$','afrikimage.views.infoauteur',name='infoauteur'),
 
-
+    url(r'^ajout_lieux$' , 'afrikimage.views.add_lieux' , name = 'ajout_lieux'),
+    
     url(r'^admin/', include(admin.site.urls)),
     
 

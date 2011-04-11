@@ -7,7 +7,6 @@ class SearchForm(forms.Form):
     nom= forms.CharField(max_length=30)
 
 class PhotoForm(forms.ModelForm):
-    #~ file_ = forms.Field(widget=forms.FileInput, required=False)
     class Meta:
         model = Photo
 
@@ -20,3 +19,7 @@ class Autorform(forms.Form):
     adresse =forms.CharField(max_length = 200)
     email = forms.EmailField ()
     experience = forms.IntegerField(required=False)
+
+class LieuxForm(forms.ModelForm):
+    class Meta:
+        model = Lieux
