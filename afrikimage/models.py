@@ -18,7 +18,7 @@ class Auteur(models.Model):
 
 
 class Lieux(models.Model):
-    
+
     cadre = models.CharField(max_length=15,choices= (('I','Interieur'),
                                                      ('E','Exterieur')))
     saison = models.CharField(max_length=15,choices= (('P','Printemps'),

@@ -63,9 +63,32 @@ def infoauteur(request,*args, **kwargs):
     return render_to_response('infoauteur.html',context)
 
 
-def galerie(request):
-    a = Photo.objects.select_related().order_by("photographe__nom")
-    return render_to_response('galerie.html',{'a':a})
+def galerie(request,*args, **kwargs):
+    num = kwargs["num"] or 1
+    photo = Photo.objects.select_related().order_by("photographe__nom")
+    paginator = Paginator(photo,30)
+    try:
+        page = paginator.page(int(num))
+    
+    except EmptyPage:
+        raise Http404
+    #s'execute si le numero de la page est 2
+    page.is_before_first = (page.number == 2)
+    #si le numero de la page est egale au numero de l'avant 
+    #de l'anvant dernier
+    page.is_before_last = (page.number == paginator.num_pages - 1)
+    #on constitue l'url de la page suivante
+    page.url_next = reverse('galerie', args=[int(num) + 1])
+    #on constititue l'url de page precedente
+    page.url_previous = reverse('galerie',args=[int(num) - 1])
+    #constitue l'url de la premiere page
+    page.url_first = reverse('galerie')
+    #on constitue l'url de la derniere page
+    page.url_last = reverse('galerie', args = [paginator.num_pages])
+    ctx = {'page':page,'paginator':paginator}
+    
+    return render_to_response('galerie.html',ctx)
+
 
 
 def add_photo(request):
@@ -144,25 +167,20 @@ def add_lieux(request):
     context.update(csrf(request))
     form = LieuxForm()
     context.update({'form':form})
+    lieu =Lieux()
     if request.method == 'POST':
-        data =  {
-                    'cadre': request.POST['cadre'],\
-                    'saison': request.POST['saison'],\
-                    'type_in':request.POST['type_in'],\
-                    'type_ex' : request.POST['type_ex'],\
-                }
-        try:
-            doublon = Lieux.objects.filter(cadre = data['cadre'],saison = data['saison'],type_in = data['type_in'],type_ex = data['type_ex'])
-        except ValueEror:
-            pass
-        form = LieuxForm(data)
-        if form.is_valid():
-            if not doublon:
-                form.save()
-                return HttpResponseRedirect(reverse('ajoutphoto'))
-            else:
-                context.update({'form':form,'error':'existe deja'})
-                return render_to_response ('add_lieux.html',context)
+        lieu.cadre = request.POST.get('cadre')
+        lieu.saison =  request.POST.get('saison')
+        lieu.type_in = request.POST.get('type_in')
+        lieu.type_ex = request.POST.get('type_ex')
+        doublon = Lieux.objects.filter(cadre = lieu.cadre,saison = lieu.saison,type_in =lieu.type_in,type_ex = lieu.type_ex)
+        if not doublon:
+            lieu.save()
+            return HttpResponseRedirect(reverse('ajoutphoto'))
+        else:
+            context.update({'form':form,'error':'existe deja'})
+            return render_to_response ('add_lieux.html',context)
+
     context.update(csrf(request))    
     return render_to_response('add_lieux.html',context,)
     

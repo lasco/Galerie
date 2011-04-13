@@ -10,7 +10,7 @@ urlpatterns = patterns('',
 
     url(r'^auteur$', 'afrikimage.views.auteur',name='auteur'),
 
-    url(r'^galerie$','afrikimage.views.galerie',name='galerie'),
+    url(r'^galerie/(?P<num>\d+)*$','afrikimage.views.galerie',name='galerie'),
 
     url(r'^photographes$', 'afrikimage.views.photographe',name='photographe'),
 
